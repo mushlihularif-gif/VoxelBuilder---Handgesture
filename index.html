@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Voxel Builder</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Load MediaPipe Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+    <!-- Load Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
+
+    <!-- Load jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Main Content Area -->
+        <main class="workspace">
+            <div class="video-container">
+                <!-- Video stream from webcam -->
+                <video class="input_video" autoplay playsinline></video>
+                <!-- Canvas to display the webcam feed and hand landmarks -->
+                <canvas class="output_canvas" width="1280" height="720"></canvas>
+                <!-- Canvas for Three.js 3D Rendering -->
+                <canvas class="webgl_canvas" width="1280" height="720"></canvas>
+                
+                <!-- Loading indicator -->
+                <div id="loading" class="loading-overlay">
+                    <div class="spinner"></div>
+                    <p>Memuat Engine Voxel 3D...</p>
+                </div>
+
+                <!-- PDF Loading indicator -->
+                <div id="pdf-loading" class="loading-overlay" style="display: none; background: rgba(0,0,0,0.8); z-index: 100;">
+                    <div class="spinner" style="border-top-color: #ff33aa;"></div>
+                    <p>Menyimpan ke PDF...</p>
+                </div>
+            </div>
+
+            <!-- Toolbar UI -->
+            <aside class="toolbar">
+                <div class="tools-group">
+                    <h3>Warna Balok</h3>
+                    <div class="color-picker">
+                        <button class="color-btn active" data-color="#ff33aa" style="background-color: #ff33aa; box-shadow: 0 0 10px #ff33aa;"></button>
+                        <button class="color-btn" data-color="#00ffff" style="background-color: #00ffff;"></button>
+                        <button class="color-btn" data-color="#ffff00" style="background-color: #ffff00;"></button>
+                        <button class="color-btn" data-color="#33ff33" style="background-color: #33ff33;"></button>
+                        <button class="color-btn" data-color="#ffffff" style="background-color: #ffffff;"></button>
+                    </div>
+                </div>
+                
+                <div class="tools-group">
+                    <h3>Aksi</h3>
+                    <button id="clearBtn" class="action-btn">🗑️ Hapus Semua</button>
+                </div>
+
+                <div class="instructions">
+                    <h3>Cara Penggunaan:</h3>
+                    <ul>
+                        <li>☝️ <strong>1 Telunjuk:</strong> Arahkan Kursor Penempatan Balok</li>
+                        <li>✋ <strong>1 Telapak Terbuka:</strong> Geser Bangunan</li>
+                        <li>🙌 <strong>2 Telapak Terbuka:</strong> Putar 3D</li>
+                        <li>🤏 <strong>1 Cubitan:</strong> Gambar Balok 3D</li>
+                        <li>🤏🤏 <strong>2 Cubitan:</strong> Tarik Menjauh (Zoom In) / Dekatkan (Zoom Out)</li>
+                        <li>✌️ <strong>2 Jari (Peace):</strong> Mode Warna-Warni</li>
+                        <li>✊ <strong>Genggam (Fist):</strong> Hancurkan!</li>
+                        <li>👍 <strong>Jempol (Thumbs Up):</strong> Simpan ke PDF</li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
