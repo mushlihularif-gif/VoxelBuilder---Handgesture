@@ -1,0 +1,3 @@
+- laragon/www/project..
+- runing
+- open index.html 
