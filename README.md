@@ -1,3 +1,3 @@
 - laragon/www/project..
-- runing
+- running
 - open index.html 
